@@ -4,7 +4,8 @@ import javax.servlet.http.*;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.ssafy.guestbook.model.MemberDto;
+import com.ssafy.practiceHappyhouse.model.dto.MemberDto;
+
 
 public class ConfirmInterceptor extends HandlerInterceptorAdapter {
 
