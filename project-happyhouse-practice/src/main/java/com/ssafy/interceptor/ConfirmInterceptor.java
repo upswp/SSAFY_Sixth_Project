@@ -8,7 +8,7 @@ import com.ssafy.guestbook.model.MemberDto;
 
 public class ConfirmInterceptor extends HandlerInterceptorAdapter {
 
-	@Override
+	@Override  
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
