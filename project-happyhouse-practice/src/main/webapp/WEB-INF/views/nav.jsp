@@ -35,10 +35,8 @@
 							onclick="javascript:memberDetail();">회원정보</button></li>
 				</c:if>
 				<c:if test="${empty userinfo}">
-					<li class="nav-item"><a class="nav-link"
-						href="./user/login.jsp">Login</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="./user/join.jsp">회원가입</a></li>
+					<li class="nav-item"><a class="nav-link" href="${root}/user/login">Login</a></li>
+					<li class="nav-item"><a class="nav-link" href="${root}/user/join">회원가입</a></li>
 				</c:if>
 
 			</ul>
