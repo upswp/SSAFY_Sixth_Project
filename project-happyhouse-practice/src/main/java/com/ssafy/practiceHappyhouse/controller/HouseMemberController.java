@@ -1,5 +1,6 @@
 package com.ssafy.practiceHappyhouse.controller;
 
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.*;
@@ -9,12 +10,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ssafy.practiceHappyhouse.model.dto.MemberDto;
 import com.ssafy.practiceHappyhouse.model.service.MemberService;
+
+import io.swagger.annotations.ApiParam;
 
 @Controller
 @RequestMapping("/user")
@@ -71,38 +76,10 @@ public class HouseMemberController {
 		return "user/join";
 	}
 
-	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String join(HttpSession session, HttpServletRequest request) {
-		String path = "/index.jsp";
-
-		// 1.data get
-		MemberDto memberDto = new MemberDto();
-		memberDto.setUserid(request.getParameter("userid"));
-		memberDto.setUsername(request.getParameter("username"));
-		memberDto.setUserpwd(request.getParameter("userpwd"));
-		memberDto.setEmail(request.getParameter("emailid") + "@" + request.getParameter("emaildomain"));
-		memberDto.setAddress(request.getParameter("zipcode") + " " + request.getParameter("address") + " "
-				+ request.getParameter("address_detail"));
-
-		// 2. 1번 data를 가지고 service(logic) call
-		try {
-			// 회원가입 성공여부를 cnt로 판단.
-			int cnt = MemberService.join(memberDto);
-
-			if (cnt != 0) { // 회원가입 성공
-				path = "/user/joinok.jsp";
-				request.setAttribute("registerinfo", memberDto);
-			} else { // 회원가입 실패
-				path = "/user/joinfail.jsp";
-				request.setAttribute("msg", "서버에 문제가 있어 회원가입에 실패했습니다.<br>다음 기회에 다시 시도해 주십시오.");
-
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			request.setAttribute("msg", "회원가입 처리 중 문제가 발생했습니다.");
-			path = "/error/error.jsp";
-		}
-		return "index";
+	@RequestMapping(value = "/join", method = RequestMethod.POST, headers = { "Content-type=application/json" })
+	public String userRegister(MemberDto memberDto) {
+		memberService.userRegister(memberDto);
+		return "user/login";
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
