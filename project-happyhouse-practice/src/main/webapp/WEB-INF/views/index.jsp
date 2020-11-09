@@ -11,9 +11,19 @@
 <title>HappyHouse</title>
 <meta charset="utf-8">
 <!-- header호출 -->
-<jsp:include page="common/header.jsp" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dfebd97b0ebbc269f439edcad3f447ac&libraries=services"></script>
+
+<%-- <jsp:include page="common/header.jsp" /> --%>
 <!-- js호출 -->
-<script type="text/javascript" src ="js/index.js"></script>
+<script type="text/javascript" src ="${root}/js/index.js"></script>
+<!-- css호출 -->
+<link rel="stylesheet" href="${root}/css/index.css" type="text/css">
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.ajax({
@@ -74,8 +84,7 @@
 	});//ready
 	
 </script>
-<!-- css호출 -->
-<link rel="stylesheet" href="css/index.css" type="text/css">
+<
 
 </head>
 <body>
@@ -93,7 +102,7 @@
 		</ul>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="./img/home1.jpg" alt="Los Angeles" width="1100"
+				<img src="${root}/img/home1.jpg" alt="Los Angeles" width="1100"
 					height="500">
 				<div class="carousel-caption">
 					<h3>Los Angeles</h3>
@@ -101,14 +110,14 @@
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="./img/home2.jpg" alt="Chicago" width="1100" height="500">
+				<img src="${root}/img/home2.jpg" alt="Chicago" width="1100" height="500">
 				<div class="carousel-caption">
 					<h3>Chicago</h3>
 					<p>Thank you, Chicago!</p>
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="./img/home3.jpg" alt="New York" width="1100" height="500">
+				<img src="${root}/img/home3.jpg" alt="New York" width="1100" height="500">
 				<div class="carousel-caption">
 					<h3>New York</h3>
 					<p>We love the Big Apple!</p>

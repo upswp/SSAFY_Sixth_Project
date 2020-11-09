@@ -3,6 +3,9 @@ package com.ssafy.practiceHappyhouse.controller;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +19,9 @@ import com.ssafy.practiceHappyhouse.model.service.MemberService;
 @Controller
 @RequestMapping("/user")
 public class HouseMemberController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(HouseMemberController.class);
+	
 	@Autowired
 	private MemberService memberService;
 
@@ -27,6 +33,7 @@ public class HouseMemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@RequestParam Map<String, String> map, Model model, HttpSession session,
 			HttpServletResponse response) {
+		logger.debug("===================================로그인 진행중.===================================");
 		try {
 			MemberDto memberDto = memberService.login(map);
 			if (memberDto != null) {
@@ -54,6 +61,7 @@ public class HouseMemberController {
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
+		
 		session.invalidate();
 		return "redirect:/";
 	}

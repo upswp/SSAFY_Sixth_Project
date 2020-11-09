@@ -1,8 +1,9 @@
 function logout() {
-	document.location.href = "./member?act=logout";
+	alert("hello logout");
+	document.location.href = "logout";
 }
 function memberDetail() {
-	document.location.href = "./member?act=memberDetail";
+	document.location.href = "list";
 }
 
 

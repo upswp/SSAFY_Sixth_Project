@@ -13,6 +13,8 @@
 	<jsp:include page="../common/header.jsp" />
 	<!-- js호출 -->
 	<script type="text/javascript" src ="../js/login.js"></script>
+	<!-- js호출 -->
+<script type="text/javascript" src ="${root}/js/index.js"></script>
 	<!-- css호출 -->
 	<link rel="stylesheet" href="../css/login.css" type="text/css">
 	

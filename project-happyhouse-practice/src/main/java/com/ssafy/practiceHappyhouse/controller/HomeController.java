@@ -1,4 +1,4 @@
-package com.ssafy.practiceHappyhouse;
+package com.ssafy.practiceHappyhouse.controller;
 
 
 import org.slf4j.Logger;

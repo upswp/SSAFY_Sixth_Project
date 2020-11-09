@@ -18,5 +18,7 @@ $(document).ready(function() {
 });
 	  
 function moveJoin() {
-	document.location.href = "${root}/member?act=join";
+	document.location.href = "${root}/user/join";
 }	
+
+
