@@ -51,7 +51,10 @@ public class NoticeController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(@RequestParam Map<String, String> map, Model model) {
 		String spp = map.get("spp");
+		String pg= map.get("pg");
 		map.put("spp", spp != null ? spp : "10");//sizePerPage
+		map.put("pg", pg != null ? pg : "1");//sizePerPage
+		
 		try {
 			List<NoticeBookDto> list = noticeService.listArticle(map);
 			PageNavigation pageNavigation = noticeService.makePageNavigation(map);
@@ -85,7 +88,7 @@ public class NoticeController {
 			guestBookDto.setUserid(memberDto.getUserid());
 			try {
 				noticeService.modifyArticle(guestBookDto);
-				return "board/writesuccess";
+				return "article/writesuccess";
 			} catch (Exception e) {
 				e.printStackTrace();
 				model.addAttribute("msg", "글수정중 문제가 발생했습니다.");
