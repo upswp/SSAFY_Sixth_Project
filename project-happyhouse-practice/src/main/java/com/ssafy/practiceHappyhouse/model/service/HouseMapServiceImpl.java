@@ -18,7 +18,7 @@ public class HouseMapServiceImpl implements HouseMapService {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<SidoGugunCodeDto> getSido() {
+	public List<SidoGugunCodeDto> getSido() throws Exception{
 		return sqlSession.getMapper(HouseMapMapper.class).getSido();
 	}
 

@@ -5,22 +5,22 @@
 <mapper namespace="com.ssafy.practiceHappyhouse.model.dao.HouseMapMapper">
 
 	<select id="getSido" resultType="SidoGugunCodeDto">
-		select left(sido_code,2) sido_code, sido_name 
+		select left(sido_code,2) sidoCode, sido_name sidoName
 		from sidocode
-		order by sido_code;
+		order by sidoCode;
 	</select>
 	
 	<select id="getGugunInSido" parameterType="String" resultType="SidoGugunCodeDto">
-		select left(gugun_code,5) gugun_code, gugun_name 
+		select left(gugun_code,5) gugunCode, gugun_name gugunName
 		from guguncode
-		where left(gugun_code,2) = #{sido}
-		order by gugun_code;
+		where left(gugun_code,2) = #{sidoCode}
+		order by gugunCode;
 	</select>
 	
 	<select id="getDongInGugun" parameterType="String" resultType="HouseInfoDto">
 		select distinct dong, code 
 		from houseinfo
-		where code = #{gugun}
+		where code = #{gugunCode}
 		order by dong;
 	</select>
 	

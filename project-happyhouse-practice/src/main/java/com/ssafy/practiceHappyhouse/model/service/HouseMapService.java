@@ -11,7 +11,7 @@ public interface HouseMapService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<SidoGugunCodeDto> getSido();
+	List<SidoGugunCodeDto> getSido() throws Exception;
 	/**
 	 * 구군 리스트 반환
 	 * @param sido

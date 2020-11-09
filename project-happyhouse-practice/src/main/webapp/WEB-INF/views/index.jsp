@@ -14,6 +14,66 @@
 <jsp:include page="common/header.jsp" />
 <!-- js호출 -->
 <script type="text/javascript" src ="js/index.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.ajax({
+			url:'${root}/map/sido',  
+			type:'GET',
+			contentType:'application/json;charset=utf-8',
+			dataType:'json',
+			success:function(data) {
+				$(data).each(function(index, vo) {
+					console.log("vo: " + vo.sidoCode + "시도 이름 : " + vo.sidoName);
+					$("#sido").append("<option value='"+vo.sidoCode+"'>"+vo.sidoName+"</option>");
+				});//each
+			},
+			error:function(xhr,status,error){
+				console.log("상태값 : " + xhr.status + "\nHttp에러메시지 : " + xhr.responseText + "\nerror : " + error);
+			}
+		});
+	});//ready
+	$(document).ready(function(){
+		$("#sido").change(function() {
+			let sidoCode = $("#sido").val();
+			$.ajax({
+				url:'${root}/map/sido/'+sidoCode,  
+				type:'GET',
+				contentType:'application/json;charset=utf-8',
+				dataType:'json',
+				success:function(data) {
+					$("#gugun").empty();
+					$("#gugun").append('<option value="0">선택</option>');
+					$(data).each(function(index, vo) {
+						$("#gugun").append("<option value='"+vo.gugunCode+"'>"+vo.gugunName+"</option>");
+					});//each
+				},
+				error:function(xhr,status,error){
+					console.log("상태값 : " + xhr.status + "\nHttp에러메시지 : " + xhr.responseText + "\nerror : " + error);
+				}
+			});
+		});//change
+		$("#gugun").change(function() {
+			let gugunCode = $("#gugun").val();
+			$.ajax({
+				url:'${root}/map/gugun/'+gugunCode,  
+				type:'GET',
+				contentType:'application/json;charset=utf-8',
+				dataType:'json',
+				success:function(data) {
+					$("#dong").empty();
+					$("#dong").append('<option value="0">선택</option>');
+					$(data).each(function(index, vo) {
+						$("#dong").append("<option value='"+vo.dong+"'>"+vo.dong+"</option>");
+					});//each
+				},
+				error:function(xhr,status,error){
+					console.log("상태값 : " + xhr.status + "\nHttp에러메시지 : " + xhr.responseText + "\nerror : " + error);
+				}
+			});
+		});//change
+	});//ready
+	
+</script>
 <!-- css호출 -->
 <link rel="stylesheet" href="css/index.css" type="text/css">
 

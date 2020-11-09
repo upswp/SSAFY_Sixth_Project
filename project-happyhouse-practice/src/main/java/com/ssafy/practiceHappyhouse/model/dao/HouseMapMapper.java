@@ -8,7 +8,7 @@ import com.ssafy.practiceHappyhouse.model.dto.SidoGugunCodeDto;
 
 public interface HouseMapMapper {
 
-	List<SidoGugunCodeDto> getSido();
+	List<SidoGugunCodeDto> getSido() throws SQLException;
 	List<SidoGugunCodeDto> getGugunInSido(String sido) throws SQLException;
 	List<HouseInfoDto> getDongInGugun(String gugun) throws SQLException;
 	List<HouseInfoDto> getAptInDong(String dong) throws SQLException;
