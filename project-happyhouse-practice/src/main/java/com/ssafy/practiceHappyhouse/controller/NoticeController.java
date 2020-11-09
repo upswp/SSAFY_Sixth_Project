@@ -53,7 +53,7 @@ public class NoticeController {
 		String spp = map.get("spp");
 		String pg= map.get("pg");
 		map.put("spp", spp != null ? spp : "10");//sizePerPage
-		map.put("pg", pg != null ? pg : "1");//sizePerPage
+		map.put("pg", pg != null ? pg : "1");//size PerPage
 		
 		try {
 			List<NoticeBookDto> list = noticeService.listArticle(map);
