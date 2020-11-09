@@ -48,8 +48,4 @@ public class MemberServiceImpl implements MemberService {
 		sqlSession.getMapper(MemberMapper.class).userDelete(userid);
 	}
 
-	@Override
-	public MemberDto join(MemberDto memberDto) throws Exception {
-		return sqlSession.insert(memberDto);
-	}
 }

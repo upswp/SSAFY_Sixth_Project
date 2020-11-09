@@ -34,4 +34,10 @@ public class HouseMapController {
 	public List<HouseInfoDto> getDongInGugun(@PathVariable("gugunCode") String gugun) throws Exception {
 		return housemapService.getDongInGugun(gugun);
 	}
+	
+	@RequestMapping(value = "/dong/{dong}", method = RequestMethod.GET, headers = { "Content-type=application/json" })
+	public List<HouseInfoDto> getAptInDong(@PathVariable("dong") String dong) throws Exception {
+		return housemapService.getAptInDong(dong);
+	}
+	
 }

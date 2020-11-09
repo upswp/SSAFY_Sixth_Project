@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.practiceHappyhouse.model.dao.HouseDealMapper">
+	
+	<select id="getAptInfo" parameterType="String" resultType="HouseDealDto">
+		select no,dong,AptName,code,dealAmount,buildYear,dealYear,dealMonth,dealDay,area,floor,jibun,type,rentMoney
+		from housedeal
+		where dong=#{dong}
+		order by AptName;
+		
+	</select>
+</mapper>

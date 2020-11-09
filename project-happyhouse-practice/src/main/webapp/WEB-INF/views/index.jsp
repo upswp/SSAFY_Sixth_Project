@@ -25,6 +25,10 @@
 <!-- css호출 -->
 <link rel="stylesheet" href="${root}/css/index.css" type="text/css">
 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfgD0J515l6cqc1_19WT2l9Jxie9PfWbk&callback=initMap"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.ajax({
@@ -82,9 +86,88 @@
 				}
 			});
 		});//change
+		
+		$("#searchBtn").click(function() {
+			let dong = $("#dong").val();
+			$.ajax({
+				url:'${root}/map/dong/'+dong,  
+				type:'GET',
+				contentType:'application/json;charset=utf-8',
+				dataType:'json',
+				success:function(data) {
+					$("#result").empty();
+					$("#result").append("<p>조건에 맞는 총 <b>"+Object.keys(data).length+"개</b>의 집이 있습니다.</p>");
+					$("#dong").append('<option value="0">선택</option>');
+					$(data).each(function(index, vo) {
+						let str = "<div id="+vo.no+" "+vo.dong+">"
+						+ "<p>아파트 ID : <b>"+vo.no+"</b></p>"
+						+ "<p>아파트 이름 : <b>"+vo.aptName+"</b></p>"
+						+ "<p>동 이름 : <b>"+vo.aptName+"</b></p>"
+						+ "<img src='./img/창신동두산.jpg'/>"
+						+ "</div>";
+						$("#result").append(str);
+					});//each
+					geocode(data);
+					getHouseDealData(dong);
+				},
+				error:function(xhr,status,error){
+					console.log("상태값 : " + xhr.status + "\nHttp에러메시지 : " + xhr.responseText + "\nerror : " + error);
+				}
+			});
+			
+		});//change
 	});//ready
+	function geocode(jsonData) {
+		let idx = 0;
+		$.each(jsonData, function(index, vo) {
+			let tmpLat;
+			let tmpLng;
+			$.get("https://maps.googleapis.com/maps/api/geocode/json"
+					,{	key:'AIzaSyAfgD0J515l6cqc1_19WT2l9Jxie9PfWbk'
+						, address:vo.dong+"+"+vo.aptName+"+"+vo.jibun
+					}
+					, function(data, status) {
+						tmpLat = vo.lat;
+						tmpLng = vo.lng;
+						addMarker(tmpLat, tmpLng, vo.aptName);
+					}
+					
+					, "json"
+			);//get
+		});//each
+		deleteMarker();
+	};
+	function getHouseDealData(dong){
+		$.ajax({
+			url:'${root}/deal/dong/'+dong,  
+			type:'GET',
+			contentType:'application/json;charset=utf-8',
+			dataType:'json',
+			success:function(data) {
+				$("#searchResult").empty();
+				$(data).each(function(index, dvo) {
+					let str = "<tr class="+colorArr[index%3]+">"
+					+ "<td>" + dvo.no + "</td>"
+					+ "<td>" + dvo.dong + "</td>"
+					+ "<td>" + dvo.aptName + "</td>"
+					+ "<td>" + dvo.jibun + "</td>"
+					+ "<td>" + dvo.dealAmount + "</td>"
+					+ "<td>" + dvo.buildYear + "</td>"
+					+ "<td>" + dvo.dealYear + "</td>"
+					+ "<td>" + dvo.area + "</td>"
+					+ "<td>" + dvo.floor +"</td></tr>";
+					$("#searchReasult").append(str);
+				});//each
+			},
+			error:function(xhr,status,error){
+				console.log("상태값 : " + xhr.status + "\nHttp에러메시지 : " + xhr.responseText + "\nerror : " + error);
+			}
+		});
+	}
 	
 </script>
+<!-- css호출 -->
+<link rel="stylesheet" href="css/index.css" type="text/css">
 
 </head>
 <body>
@@ -102,7 +185,7 @@
 		</ul>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="${root}/img/home1.jpg" alt="Los Angeles" width="1100"
+				<img src="./img/home1.jpg" alt="Los Angeles" width="1100"
 					height="500">
 				<div class="carousel-caption">
 					<h3>Los Angeles</h3>
@@ -110,14 +193,14 @@
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="${root}/img/home2.jpg" alt="Chicago" width="1100" height="500">
+				<img src="./img/home2.jpg" alt="Chicago" width="1100" height="500">
 				<div class="carousel-caption">
 					<h3>Chicago</h3>
 					<p>Thank you, Chicago!</p>
 				</div>
 			</div>
 			<div class="carousel-item">
-				<img src="${root}/img/home3.jpg" alt="New York" width="1100" height="500">
+				<img src="./img/home3.jpg" alt="New York" width="1100" height="500">
 				<div class="carousel-caption">
 					<h3>New York</h3>
 					<p>We love the Big Apple!</p>
@@ -134,8 +217,8 @@
 
 	<!-- select 검색 시작 -->
 	<div class="div-select">
-		<form id="dong-form" action="${root}/map" method="post">
-			<input type="hidden" name='act' value='apt' /> <select
+		<form id="dong-form" action="" method="post">
+			<select
 				id="house-type" name="house-type" class="background-gray">
 				<option value="">선택</option>
 				<option value="전체">전체</option>
@@ -147,18 +230,76 @@
 				<option value="">선택</option>
 			</select> <select id="dong" name="dong" class="background-gray">
 				<option value="">선택</option>
-			</select> <input type="submit" value="검색" class="background-gray">
+			</select> <button type="button" id="searchBtn" class="background-gray">검색</button>
 		</form>
 	</div>
 	<!-- select 검색 끝 -->
 
 	<br />
-	<!-- 카카오 맵 시작 -->
-	<div id="map" style="width: 80%; height: 350px; margin: 0 auto;"></div>
-	<!-- 카카오 맵 끝 -->
-
-	<br />
-
+		
+	<!-- 지도와 검색 결과 -->
+	<div class="container">
+		<div class="row">
+			<div id="result"></div>
+			<div id="map" style="width: 80%; height: 350px; margin: 0 auto;"></div>
+		</div>
+		<script>
+					var multi = {lat: 37.5665734, lng: 126.978179};
+					var map;
+					var markers = new Array;
+					function initMap() {
+						map = new google.maps.Map(document.getElementById('map'), {
+							center: multi, zoom: 12
+						});
+						var marker = new google.maps.Marker({position: multi, map: map});
+						markers.push(marker);
+					}
+					function deleteMarker(){
+						for(var i = 0; i < markers.length; i++){
+							markers[i].setMap(null);
+						}
+						markers=[];
+					}
+					function addMarker(tmpLat, tmpLng, aptName) {
+						var marker = new google.maps.Marker({
+							position: new google.maps.LatLng(parseFloat(tmpLat),parseFloat(tmpLng)),
+							label: aptName,
+							title: aptName
+						});
+						marker.addListener('click', function() {
+							map.setZoom(15);
+							map.setCenter(marker.getPosition());
+							callHouseDealInfo(aptName);
+						});
+						marker.setMap(map);
+						markers.push(marker);
+					}
+					function callHouseDealInfo(aptName) {// 위치 클릭시 상세정보 나타나도록 하기
+						
+					}
+			</script>
+		
+		<!-- 결과 Table -->
+		<div>
+			<table class="table mt-2">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>법정동</th>
+						<th>아파트이름</th>
+						<th>지번</th>
+						<th>실거래가</th>
+						<th>건축연도</th>
+						<th>거래날짜</th>
+						<th>평수(m^2)</th>
+						<th>층</th>
+					</tr>
+				</thead>
+				<tbody id="searchResult">
+				</tbody>
+			</table>
+		</div>
+	</div>
 	<!-- contents 시작 -->
 	<div class="container-fluid contents">
 		<div class="row">
@@ -226,7 +367,6 @@
 	<br />
 
 	<!-- footer호출 -->
-<jsp:include page="./common/footer.jsp"/>
+<jsp:include page="common/footer.jsp" />
 </body>
-
 </html>
