@@ -13,34 +13,34 @@ import com.ssafy.practiceHappyhouse.model.service.MemberService;
 public class AdminController {
 
 	@Autowired
-	private MemberService userService;
+	private MemberService memberService;
 	
 	@RequestMapping(value = "/user", method = RequestMethod.GET, headers = { "Content-type=application/json" })
 	public List<MemberDto> userList() {
-		return userService.userList();
+		return memberService.userList();
 	}
 	
 	@RequestMapping(value = "/user", method = RequestMethod.POST, headers = { "Content-type=application/json" })
 	public List<MemberDto> userRegister(@RequestBody MemberDto memberDto) {
-		userService.userRegister(memberDto);
-		return userService.userList();
+		memberService.userRegister(memberDto);
+		return memberService.userList();
 	}
 	
 	@RequestMapping(value = "/user/{userid}", method = RequestMethod.GET, headers = { "Content-type=application/json" })
 	public MemberDto userInfo(@PathVariable("userid") String userid) {
-		return userService.userInfo(userid);
+		return memberService.userInfo(userid);
 	}
 	
 	@RequestMapping(value = "/user", method = RequestMethod.PUT, headers = { "Content-type=application/json" })
 	public List<MemberDto> userModify(@RequestBody MemberDto memberDto) {
-		userService.userModify(memberDto);
-		return userService.userList();
+		memberService.userModify(memberDto);
+		return memberService.userList();
 	}
 	
 	@RequestMapping(value = "/user/{userid}", method = RequestMethod.DELETE, headers = { "Content-type=application/json" })
 	public List<MemberDto> userDelete(@PathVariable("userid") String userid) {
-		userService.userDelete(userid);
-		return userService.userList();
+		memberService.userDelete(userid);
+		return memberService.userList();
 	}
 	
 }

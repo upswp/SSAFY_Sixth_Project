@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ssafy.guestbook.model.mapper.GuestBookMapper">
+<mapper namespace="com.ssafy.practiceHappyhouse.model.dao.NoticeBookMapper">
 
-	<insert id="writeArticle" parameterType="GuestBookDto">
+	<insert id="writeArticle" parameterType="NoticeBookDto">
 		insert into guestbook (userid, subject, content, regtime)
 		values (#{userid}, #{subject}, #{content}, now())
 	</insert>
 	
-	<select id="listArticle" parameterType="map" resultType="GuestBookDto">
+	<select id="listArticle" parameterType="map" resultType="NoticeBookDto">
 		select articleno, userid, subject, content, regtime
 		from guestbook
 		<if test="word != null and word != ''">
@@ -37,13 +37,13 @@
 		</if>
 	</select>
 	
-	<select id="getArticle" parameterType="int" resultType="GuestBookDto">
+	<select id="getArticle" parameterType="int" resultType="NoticeBookDto">
 		select articleno, userid, subject, content, regtime
 		from guestbook
 		where articleno = #{articleno}
 	</select>
 	
-	<update id="modifyArticle" parameterType="GuestBookDto">
+	<update id="modifyArticle" parameterType="NoticeBookDto">
 		update guestbook
 		set subject = #{subject}, content = #{content}
 		where articleno = #{articleno}
