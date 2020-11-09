@@ -1,5 +1,9 @@
 package com.ssafy.practiceHappyhouse.model.dao;
 
-public interface HospitalDao {
+import java.util.List;
 
+import com.ssafy.practiceHappyhouse.model.dto.HospitalDto;
+
+public interface HospitalDao {
+	List<HospitalDto> searchHospitals(String gugun);
 }
