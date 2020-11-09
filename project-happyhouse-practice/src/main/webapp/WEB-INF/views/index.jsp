@@ -20,8 +20,8 @@
 
 <%-- <jsp:include page="common/header.jsp" /> --%>
 <!-- js호출 -->
-<script type="text/javascript" src ="${root}/js/index.js"></script>
 <script type="text/javascript" src ="${root}/js/login.js"></script>
+<script type="text/javascript" src ="${root}/js/index.js"></script>
 <!-- css호출 -->
 <link rel="stylesheet" href="${root}/css/index.css" type="text/css">
 
@@ -89,7 +89,7 @@
 </head>
 <body>
 <!-- nav호출 -->
-<jsp:include page="nav.jsp" />
+<jsp:include page="./common/nav.jsp" />
 
 
 	<!-- carousel 시작 -->
@@ -226,7 +226,7 @@
 	<br />
 
 	<!-- footer호출 -->
-<jsp:include page="common/footer.jsp" />
+<jsp:include page="./common/footer.jsp"/>
 </body>
 
 </html>

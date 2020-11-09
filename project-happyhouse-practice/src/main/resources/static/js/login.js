@@ -21,4 +21,10 @@ function moveJoin() {
 	document.location.href = "${root}/user/join";
 }	
 
-
+function logout() {
+	alert("hello logout");
+	document.location.href = "logout";
+}
+function memberDetail() {
+	document.location.href = "list";
+}

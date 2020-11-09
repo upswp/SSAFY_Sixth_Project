@@ -26,7 +26,7 @@ public class NoticeController {
 	
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String write() {
-		return "board/write";
+		return "article/write";
 	}
 	
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
@@ -36,7 +36,7 @@ public class NoticeController {
 			guestBookDto.setUserid(memberDto.getUserid());
 			try {
 				noticeService.writeArticle(guestBookDto);
-				return "board/writesuccess";
+				return "article/writesuccess";
 			} catch (Exception e) {
 				e.printStackTrace();
 				model.addAttribute("msg", "글작성중 문제가 발생했습니다.");
@@ -48,7 +48,7 @@ public class NoticeController {
 		}
 	}
 	
-	@RequestMapping(value = "/noticeList", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(@RequestParam Map<String, String> map, Model model) {
 		String spp = map.get("spp");
 		map.put("spp", spp != null ? spp : "10");//sizePerPage
@@ -57,7 +57,7 @@ public class NoticeController {
 			PageNavigation pageNavigation = noticeService.makePageNavigation(map);
 			model.addAttribute("articles", list);
 			model.addAttribute("navigation", pageNavigation);
-			return "board/list";
+			return "article/list";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "글목록을 얻어오는 중 문제가 발생했습니다.");
@@ -70,7 +70,7 @@ public class NoticeController {
 		try {
 			NoticeBookDto guestBookDto = noticeService.getArticle(articleno);
 			model.addAttribute("article", guestBookDto);
-			return "board/modify";
+			return "article/modify";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "글수정 처리 중 문제가 발생했습니다.");
