@@ -1,16 +1,21 @@
-
-function login() {
-	if(document.getElementById("userid").value == "") {
-		alert("아이디 입력하십시오.");
-		return;
-	} else if(document.getElementById("userpwd").value == "") {
-		alert("비밀번호 입력하십시오.");
-		return;
-	} else {
-		document.getElementById("loginform").action = "../member?act=login";
-		document.getElementById("loginform").submit();
-	}
-}
+$(document).ready(function() {
+	$("#loginBtn").click(function() {
+		
+		if($("#userid").val() == "") {
+			alert("아이디 입력!!!");
+			return;
+		} else if($("#userpwd").val() == "") {
+			alert("비밀번호 입력!!!");
+			return;
+		} else {
+			$("#loginform").attr("action", "${root}/user/login").submit();
+		}
+	});
+	 
+	$('#mvRegisterBtn').focusin(function() {
+		$(location).attr("href", "${root}/");
+	});
+});
 	  
 function moveJoin() {
 	document.location.href = "../member?act=join";
