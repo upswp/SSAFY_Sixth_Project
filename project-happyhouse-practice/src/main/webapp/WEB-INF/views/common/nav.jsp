@@ -19,7 +19,7 @@
 		</button>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
+				<li class="nav-item"><a class="nav-link" href="../board/noticeList">공지사항</a></li>
 			</ul>
 		</div>
 		<div class="collapse navbar-collapse justify-content-end"
