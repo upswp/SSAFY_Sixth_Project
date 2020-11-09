@@ -1,3 +1,11 @@
+function logout() {
+	alert("hello logout");
+	document.location.href = "logout";
+}
+function memberDetail() {
+	document.location.href = "list";
+}
+
 /*카카오 맵 script */
 
 $(function() {
