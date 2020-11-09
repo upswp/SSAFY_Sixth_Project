@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ssafy.practiceHappyhouse.model.mapper.HouseMapMapper">
+<mapper namespace="com.ssafy.practiceHappyhouse.model.dao.HouseMapMapper">
 
 	<select id="getSido" resultType="SidoGugunCodeDto">
 		select left(sido_code,2) sido_code, sido_name 
