@@ -8,7 +8,7 @@ $(document).ready(function() {
 			alert("비밀번호 입력!!!");
 			return;
 		} else {
-			$("#loginform").attr("action", "${root}/user/login").submit();
+			$("#loginform").attr("action", "login").submit();
 		}
 	});
 	 

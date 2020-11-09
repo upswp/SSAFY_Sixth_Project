@@ -9,9 +9,14 @@ public interface MemberService {
 
 	public MemberDto login(Map<String, String> map) throws Exception;
 	
+	public MemberDto join(MemberDto memberDto) throws Exception;
+	
+	
 	public List<MemberDto> userList();
 	public MemberDto userInfo(String userid);
 	public void userRegister(MemberDto memberDto);
 	public void userModify(MemberDto memberDto);
 	public void userDelete(String userid);
+
+	
 }
