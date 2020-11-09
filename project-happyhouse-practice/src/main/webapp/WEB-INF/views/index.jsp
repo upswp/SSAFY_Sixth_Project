@@ -21,6 +21,7 @@
 <%-- <jsp:include page="common/header.jsp" /> --%>
 <!-- js호출 -->
 <script type="text/javascript" src ="${root}/js/index.js"></script>
+<script type="text/javascript" src ="${root}/js/login.js"></script>
 <!-- css호출 -->
 <link rel="stylesheet" href="${root}/css/index.css" type="text/css">
 
@@ -84,7 +85,6 @@
 	});//ready
 	
 </script>
-<
 
 </head>
 <body>

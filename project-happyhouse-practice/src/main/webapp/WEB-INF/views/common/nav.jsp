@@ -12,14 +12,14 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		<a class="navbar-brand" href="../index.jsp">HappyHouse</a>
+		<a class="navbar-brand" href="${root}">HappyHouse</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="../board/noticeList">공지사항</a></li>
+				<li class="nav-item"><a class="nav-link" href="${root}/article/noticeList">공지사항</a></li>
 			</ul>
 		</div>
 		<div class="collapse navbar-collapse justify-content-end"
@@ -33,10 +33,8 @@
 							onclick="javascript:memberDetail();">회원정보</button></li>
 				</c:if>
 				<c:if test="${empty userinfo}">
-					<li class="nav-item"><a class="nav-link"
-						href="${root}/user/login">Login</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="${root}/user/join">회원가입</a></li>
+					<li class="nav-item"><a class="nav-link" href="${root}/user/login">Login</a></li>
+					<li class="nav-item"><a class="nav-link" href="${root}/user/join">회원가입</a></li>
 				</c:if>
 
 			</ul>

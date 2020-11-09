@@ -22,11 +22,11 @@ import com.ssafy.util.PageNavigation;
 public class NoticeController {
 
 	@Autowired
-	private NoticeService guestBookService;
+	private NoticeService noticeService;
 	
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String write() {
-		return "guestbook/write";
+		return "board/write";
 	}
 	
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
@@ -35,8 +35,8 @@ public class NoticeController {
 		if(memberDto != null) {
 			guestBookDto.setUserid(memberDto.getUserid());
 			try {
-				guestBookService.writeArticle(guestBookDto);
-				return "guestbook/writesuccess";
+				noticeService.writeArticle(guestBookDto);
+				return "board/writesuccess";
 			} catch (Exception e) {
 				e.printStackTrace();
 				model.addAttribute("msg", "글작성중 문제가 발생했습니다.");
@@ -48,16 +48,16 @@ public class NoticeController {
 		}
 	}
 	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/noticeList", method = RequestMethod.GET)
 	public String list(@RequestParam Map<String, String> map, Model model) {
 		String spp = map.get("spp");
 		map.put("spp", spp != null ? spp : "10");//sizePerPage
 		try {
-			List<NoticeBookDto> list = guestBookService.listArticle(map);
-			PageNavigation pageNavigation = guestBookService.makePageNavigation(map);
+			List<NoticeBookDto> list = noticeService.listArticle(map);
+			PageNavigation pageNavigation = noticeService.makePageNavigation(map);
 			model.addAttribute("articles", list);
 			model.addAttribute("navigation", pageNavigation);
-			return "guestbook/list";
+			return "board/list";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "글목록을 얻어오는 중 문제가 발생했습니다.");
@@ -68,9 +68,9 @@ public class NoticeController {
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modify(@RequestParam("articleno") int articleno, Model model) {
 		try {
-			NoticeBookDto guestBookDto = guestBookService.getArticle(articleno);
+			NoticeBookDto guestBookDto = noticeService.getArticle(articleno);
 			model.addAttribute("article", guestBookDto);
-			return "guestbook/modify";
+			return "board/modify";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "글수정 처리 중 문제가 발생했습니다.");
@@ -84,8 +84,8 @@ public class NoticeController {
 		if(memberDto != null) {
 			guestBookDto.setUserid(memberDto.getUserid());
 			try {
-				guestBookService.modifyArticle(guestBookDto);
-				return "guestbook/writesuccess";
+				noticeService.modifyArticle(guestBookDto);
+				return "board/writesuccess";
 			} catch (Exception e) {
 				e.printStackTrace();
 				model.addAttribute("msg", "글수정중 문제가 발생했습니다.");
@@ -100,7 +100,7 @@ public class NoticeController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String delete(@RequestParam("articleno") int articleno, Model model) {
 		try {
-			guestBookService.deleteArticle(articleno);
+			noticeService.deleteArticle(articleno);
 			return "redirect:list?pg=1&key=&word=";
 		} catch (Exception e) {
 			e.printStackTrace();
