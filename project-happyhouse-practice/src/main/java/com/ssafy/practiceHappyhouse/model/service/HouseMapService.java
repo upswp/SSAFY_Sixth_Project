@@ -11,26 +11,26 @@ public interface HouseMapService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<SidoGugunCodeDto> getSido() ;
+	List<SidoGugunCodeDto> getSido();
 	/**
 	 * 구군 리스트 반환
 	 * @param sido
 	 * @return
 	 * @throws Exception
 	 */
-	List<SidoGugunCodeDto> getGugunInSido(String sido) ;
+	List<SidoGugunCodeDto> getGugunInSido(String sido) throws Exception;
 	/**
 	 * 구군의 동 리스트 반환
 	 * @param gugun
 	 * @return
 	 * @throws Exception
 	 */
-	List<HouseInfoDto> getDongInGugun(String gugun);
+	List<HouseInfoDto> getDongInGugun(String gugun) throws Exception;
 	/**
 	 * 동의 아파트 리스트 반환
 	 * @param dong
 	 * @return
 	 * @throws Exception
 	 */
-	List<HouseInfoDto> getAptInDong(String dong);
+	List<HouseInfoDto> getAptInDong(String dong) throws Exception;
 }
