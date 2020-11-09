@@ -18,6 +18,6 @@ public class ClinicDaoImpl implements ClinicDao {
 
 	@Override
 	public List<ClinicDto> searchClinics(String gugun) {
-		return sqlSession.selectList();
+		return null;
 	}
 }
