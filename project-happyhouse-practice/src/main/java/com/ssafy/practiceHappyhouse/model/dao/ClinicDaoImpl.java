@@ -1,5 +1,5 @@
 package com.ssafy.practiceHappyhouse.model.dao;
 
-public interface HospitalDao {
+public class ClinicDaoImpl implements ClinicDao {
 
 }

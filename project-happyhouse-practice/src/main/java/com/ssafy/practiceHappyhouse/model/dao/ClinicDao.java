@@ -1,5 +1,5 @@
-package com.ssafy.practiceHappyhouse.model.mapper;
+package com.ssafy.practiceHappyhouse.model.dao;
 
-public interface ClinicMapper {
+public interface ClinicDao {
 
 }

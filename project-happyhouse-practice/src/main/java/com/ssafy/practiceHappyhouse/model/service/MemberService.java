@@ -1,5 +1,7 @@
 package com.ssafy.practiceHappyhouse.model.service;
 
-public interface LoginService {
+import com.ssafy.practiceHappyhouse.model.dto.MemberDto;
 
+public interface MemberService {
+	MemberDto login(MemberDto member);
 }

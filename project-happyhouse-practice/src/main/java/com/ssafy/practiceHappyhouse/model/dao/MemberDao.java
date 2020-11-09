@@ -1,5 +1,7 @@
-package com.ssafy.practiceHappyhouse.model.mapper;
+package com.ssafy.practiceHappyhouse.model.dao;
 
-public interface LoginMapper {
+import com.ssafy.practiceHappyhouse.model.dto.MemberDto;
 
+public interface MemberDao {
+	MemberDto login(MemberDto member);
 }
